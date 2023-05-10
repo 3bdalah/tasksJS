@@ -57,8 +57,10 @@ function addItem (e) {
     // set back  to deaful 
     setBackToDefault();
 
-}else if(value&&editeFLag){
-
+    }else if(value&&editeFLag){
+    editeElement.innerHTML = value;
+    displayAlert("value changed","green");
+    setBackToDefault();
     }else{
       displayAlert("please enter value","danger")
     }
@@ -90,7 +92,7 @@ function clearItems() {
   }
   container.classList.remove("show-container");
   displayAlert("empty list","danger");
-  setBackToDeafult();
+  setBackToDefault();
 }
 
 // edite function
@@ -102,20 +104,26 @@ function deleteItem(e){
     container.classList.remove("show-container");
   }
   displayAlert("item removed","danger");
-  setBackToDeafult();
+  setBackToDefault();
   // remove from local storage 
   removeFromLocalStorage(id);
 
 }
 
 
-function editeItem(){
+function editeItem(e){
   console.log("edited item");
+  const element = e.currentTarget.parentElement.previousElementSibling;
+  // set form value 
+  grocery.value = editeElement.innerHTML;
+  editeFLag = true;
+  editeID = element.dataset.id;
+  submitBtn.textContent = "edite";
 }
 
 
 // set back to deafult
-function setBackToDeafult(){
+function setBackToDefault(){
     grocery.value ="";
     editFlag=false;
     editId="";
